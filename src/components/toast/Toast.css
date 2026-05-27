@@ -1,0 +1,25 @@
+.toast_container{
+    position: fixed;
+    top: 5px;
+    right: 10px
+}
+.toast_card {
+    width: 320px;
+    height: 60px;
+    background-color: white;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.toast_card_info{
+    border: 1px solid orange;
+}
+
+.toast_card_failure{
+    border: 1px solid red;
+}
+
+.toast_card_success{
+    border: 1px solid green;
+}
