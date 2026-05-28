@@ -23,20 +23,31 @@ export const InputField: React.FC<IInputFieldProps> = ({
   className,
   ...props
 }) => {
-  const [focus, setFocus] = useState<boolean>(false);
+  const [isfocused, setFocus] = useState<boolean>(false);
 
   const focused = (e: FocusEvent<HTMLInputElement, Element>) => {
     setFocus(true);
     onFocus?.(e);
   };
 
-  const blured = (e: FocusEvent<HTMLInputElement, Element>) => {
+  const blurred = (e: FocusEvent<HTMLInputElement, Element>) => {
     setFocus(false);
     onBlur?.(e);
   };
 
+  const inputClasses = [
+    "base-input",
+    className,
+    error ? "input-error" : "",
+    isfocused ? "input-focus" : "",
+    disabled ? "input-disabled" : "",
+    readOnly ? "input-readonly" : "",
+  ]
+    .filter(Boolean)
+    .join(" ");
+
   return (
-    <>
+    <div className="input-field-wrapper">
       {label && <label htmlFor={id}>{label}</label>}
       <input
         {...props}
@@ -49,11 +60,14 @@ export const InputField: React.FC<IInputFieldProps> = ({
         onFocus={focused}
         onChange={onChange}
         onInput={onInput}
-        onBlur={blured}
-        className={`base-input ${className}  ${error} ? "input-error" : ""   ${focus} ? "input-focus" : ""   ${disabled} ? "input-disabled" : ""  ${readOnly} ? "input-readonly" : "" `}
+        onBlur={blurred}
+        className={inputClasses}
       />
-      {info && <small className="input-field-info">{info}</small>}
-      {error && <small className="input-field-error">{error}</small>}
-    </>
+      {error ? (
+        <small className="input-field-error">{error}</small>
+      ) : (
+        info && <small className="input-field-info">{info}</small>
+      )}
+    </div>
   );
 };
