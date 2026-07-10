@@ -1,5 +1,6 @@
 import './App.css'
-import { useToast } from './hooks/useToast'
+import { useToast } from './hooks/useToast' 
+import { UseCallbackParent } from './pages/hooks/useCallback/UseCallBackParent';
 
 function App() { 
 
@@ -11,7 +12,7 @@ function App() {
 
   return (
     <>
-       <button onClick={() => showAlert()} className='btn-primary'>Show Alert</button>
+       <UseCallbackParent />
     </>
   )
 }
